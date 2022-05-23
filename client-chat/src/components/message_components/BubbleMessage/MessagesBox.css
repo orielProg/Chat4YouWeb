@@ -1,0 +1,10 @@
+.date-badge{
+    max-width : 15% !important;
+    
+}
+.badge-row{
+    justify-content: center;
+    justify-items: center;
+    padding-bottom : 1%;
+    padding-top : 1%;
+}

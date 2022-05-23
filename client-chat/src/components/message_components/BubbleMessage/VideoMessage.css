@@ -1,0 +1,8 @@
+.vid-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.rounded-vid {
+    border-radius: 0.25rem!important;
+}

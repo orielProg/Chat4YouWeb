@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "concurrently": "^7.2.1"
+  },
+  "scripts": {
+    "client": "npm run start --prefix client-chat",
+    "api" : "dotnet run --project server-api/webAPI",
+    "rating" : "dotnet run --project RatingApp/Chat4YouServer",
+    "dev": "concurrently --kill-others \"npm run client\" \"npm run api\" \"npm run rating\""
+  }
+}

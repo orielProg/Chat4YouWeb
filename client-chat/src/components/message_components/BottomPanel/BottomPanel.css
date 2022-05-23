@@ -1,0 +1,37 @@
+#bottomPanel{
+    position:relative;
+    bottom:0;
+    margin-bottom: 0!important;
+    background-color: #202c33;
+    height:8%;
+    border : 1px solid #26343e;
+}
+#uploadPanel{
+    display:flexbox!important;
+}
+.dropdown-menu.show{
+    display:flex;
+}
+#bottomInput{
+   height: 100%;
+}
+#bottomPanelText{
+    background-color: #2b3942;
+    border-color: #2b3942;
+    color : white;   
+    height: 100%;
+}
+#bottomPanelText:focus{
+    box-shadow: none !important; 
+}
+#senderButton{
+    border-color : #2b3942;
+    height: 100%;
+    padding:0%;
+    padding-left: 2%;
+    padding-right: 2%;
+    
+}
+#senderButton:focus{
+    box-shadow: none !important; 
+}
