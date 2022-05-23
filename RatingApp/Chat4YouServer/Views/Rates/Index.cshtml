@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Chat4YouServer.Models.Rate>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div>
+    <h1 class="text-light text-center "><img src="Photos\ratesLogo.jpg" width="80" height="60" />  Chat4You</h1>
+    <h3 class="text-light text-center">
+        Average App Rating:
+        @{
+            double avg = double.Parse(ViewBag.Avg);
+            int j;
+            for (j = 0; j < avg; j++)
+            {
+                if (avg - j > 1)
+                {
+                    <span class="fa fa-star checked" style="color:orange"></span>
+                }
+            }
+            if (j > 0)
+            {
+                j--;
+            }
+            if (avg - j > 0.75)
+            {
+                <span class="fa fa-star checked" style="color:orange"></span>
+            }
+            else if (avg - j > 0.25)
+            {
+                <span class="fa fa-star-half-full checked" style="color:orange"></span>
+            }
+        }
+    </h3>
+    <form class="text-center" asp-action="Search">
+        <input name="query" id="search" />
+        <input type="submit" value="Search" />
+    </form>
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stars)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Feedback)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Created)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                         @{
+                            for (int i = 0; i < item.Stars; i++)
+                            {
+                                <span class="fa fa-star checked" style="color:orange"></span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Feedback)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Created)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts{
+    <script src="~/js/search.js"></script>
+    }

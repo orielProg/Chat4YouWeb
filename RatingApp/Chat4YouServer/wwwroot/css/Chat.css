@@ -1,0 +1,177 @@
+.chat-background {
+    width: 70%;
+    height: 80%;
+}
+
+.grid-background {
+    background-color: #202c33;
+    height: 100%;
+}
+
+.text {
+    position: relative;
+    top: 22%;
+}
+
+#search {
+    width: 30%;
+}
+
+.text-message-sender {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 6px;
+}
+
+.text-bar-message {
+    font-size: 13px;
+    line-height: 0px;
+}
+
+.message-bar {
+    position: absolute;
+    bottom: 0;
+    margin-left: 0.5%;
+}
+
+.chat-label-form {
+    bottom: 0px;
+    margin: 0.5%;
+}
+
+.main-chat-background {
+    position: relative;
+    height: 100%;
+    width: 65%;
+    background-color: bisque;
+}
+
+.attach-icon {
+    padding-top: 5px;
+    margin-left: 5px;
+}
+
+    .attach-icon:hover {
+        background-color: lightgray;
+        cursor: pointer;
+    }
+
+.container-end {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    padding-right: 0;
+}
+
+.list-group-item {
+    background-color: #111b21 !important;
+}
+
+    .list-group-item:hover {
+        background-color: #202c33 !important;
+        cursor: pointer;
+    }
+
+    .list-group-item.act {
+        border-color: #2a3942;
+        background-color: #2a3942 !important;
+    }
+
+.content-div {
+    background-color: #282c34;
+    height: 80%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+
+
+.container-relative {
+    background-color: #202c33;
+    position: relative;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.scroller {
+    background-image: url(../../pictures/darkmode2.jpg);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+#outer-div {
+    margin: 5%;
+    height: 70%;
+}
+
+.table-content {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.lower-row {
+    height: 80%;
+    flex-wrap: nowrap !important;
+}
+
+btn-outline-secondary::after {
+    padding: 0;
+}
+
+.send-icon {
+    font-size: 30px;
+    color: darkgray;
+}
+
+.left-contact-img {
+    max-width: 15%;
+    height: auto;
+}
+
+.padding-left-right-0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    background-color: #202c33;
+}
+
+.logo-container {
+    background-color: #28242c;
+    margin: 0 !important;
+}
+
+.contact-text {
+    color: white;
+}
+
+.modal-dark {
+    background-color: #202c33 !important;
+}
+
+.modal-header-dark {
+    border-bottom: 1px solid #2c3b46 !important;
+}
+
+.modal-footer-dark {
+    border-top: 1px solid #2c3b46 !important;
+}
+
+.modal-header-txt-dark {
+    color: whitesmoke;
+}
+
+.modal-input-dark {
+    border-color: #2c3b46 !important;
+    background-color: #2b3942 !important;
+}
+
+.modal-input-dark-txt {
+    color: #c1c8cc;
+}
+
+.no-focus-color:focus {
+    box-shadow: none !important;
+}

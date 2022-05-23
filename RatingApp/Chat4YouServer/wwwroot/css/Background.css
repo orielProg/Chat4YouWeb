@@ -1,0 +1,10 @@
+.background{
+    background-image: url(/Photos/umbre.jpg);
+    width : 100%;
+    height : 100%;
+    position : absolute;
+}
+.Logo{
+    padding:3%;
+    background-color: azure;
+}
