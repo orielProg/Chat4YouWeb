@@ -14,6 +14,9 @@
     height: 100%;
     
   }
+#logoImage{
+    opacity: 100;
+  }
 
 .person-icon {
   

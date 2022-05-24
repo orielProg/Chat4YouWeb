@@ -1,23 +1,24 @@
 import { Navbar, Container } from "react-bootstrap";
-import pic from './Chat4You_primaryLogo.png'
+import pic from './chatLogo.jpg'
 import '../message_components/Chat.css'
 import ratePic from './ratePic.png'
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
 const Logo = (props) => {
   return (
-    <Navbar bg="dark" variant="dark">
-      <Container className="logo-container">
+    <Navbar className="navbar-expand-lg " bg="dark" variant="dark">
+      <Container className="logo-container col-12">
         <Navbar.Brand href="#home">
           <img
             alt=""
             src={pic}
             width="100"
             height="70"
+            id="logoImage"
             className="d-inline-block align-top"
           />{' '}
         </Navbar.Brand>
       </Container>
-      <Navbar.Brand className="text-center mh-100" href="http://localhost:5029/">
+      <Navbar.Brand className="text-center col-2" href="http://localhost:5029/">
         {/**  <img
         alt=""
         src={ratePic}
