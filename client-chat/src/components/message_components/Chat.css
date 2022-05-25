@@ -14,6 +14,13 @@
     height: 100%;
     
   }
+#rateButton {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
 #logoImage{
     opacity: 100;
   }
