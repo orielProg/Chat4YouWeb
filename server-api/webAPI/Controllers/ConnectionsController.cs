@@ -35,6 +35,7 @@ namespace webAPI.Controllers
                 if (invite == null || invite.from == null || invite.to == null || invite.server == null) throw new Exception("One or more of the fields are missing");
                 if (contacts_service.isContactExists(invite.to, invite.from)) throw new Exception("Contact already exists");
                 if (invite.from == invite.to) throw new Exception("Adding yourself as a contact is not allowed");
+                if (!users_service.isUserExists(invite.to)) throw new Exception("The user does not exists");
                 Contact contact = new Contact(invite.to, invite.from, invite.from, invite.server, null, null);
                 contacts_service.Add(contact);
                 return NoContent();
