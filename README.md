@@ -43,7 +43,6 @@ it will install the dependencies in node_moudles
 
 ```
 npm run dev
-
 ```
 note: if 'npm run dev' did not work, got to environment variables=> and add the path: C:\Windows\System32
 
