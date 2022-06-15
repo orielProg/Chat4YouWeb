@@ -5,6 +5,11 @@ using Microsoft.AspNetCore.Authorization;
 using System.Runtime;
 using webAPI.Hubs;
 using Microsoft.AspNetCore.SignalR;
+using CorePush.Google;
+using System.Net.Http.Headers;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using FirebaseAdmin.Messaging;
 
 namespace webAPI.Controllers
 {
@@ -35,7 +40,6 @@ namespace webAPI.Controllers
                 if (invite == null || invite.from == null || invite.to == null || invite.server == null) throw new Exception("One or more of the fields are missing");
                 if (contacts_service.isContactExists(invite.to, invite.from)) throw new Exception("Contact already exists");
                 if (invite.from == invite.to) throw new Exception("Adding yourself as a contact is not allowed");
-                if (!users_service.isUserExists(invite.to)) throw new Exception("The user does not exists");
                 Contact contact = new Contact(invite.to, invite.from, invite.from, invite.server, null, null);
                 contacts_service.Add(contact);
                 return NoContent();
@@ -53,7 +57,7 @@ namespace webAPI.Controllers
         {
             try
             {
-                Message message = new Message(null, null, transfer.content, DateTime.Now, transfer.from, transfer.to);
+                Domain.Message message = new Domain.Message(null, null, transfer.content, DateTime.Now, transfer.from, transfer.to);
                 var fromExists = users_service.isUserExists(transfer.from);
                 var toExists = users_service.isUserExists(transfer.to);
                 if (!users_service.isUserExists(transfer.from) && !users_service.isUserExists(transfer.to))
@@ -70,8 +74,28 @@ namespace webAPI.Controllers
                     contacts_service.UpdateContact(transfer.to, transfer.from, new Contact(null, null, null, null, transfer.content, DateTime.Now));
                 }
                 else throw new Exception("Contact does not exists");
-                string conId = ChatHub.Connections.ContainsKey(transfer.to) ? ChatHub.Connections[transfer.to] : null;
-                if (conId != null) await hubContext.Clients.Client(conId).SendAsync("ReceiveMessage", transfer.content);
+                string? conId = ChatHub.Connections.ContainsKey(transfer.to) ? ChatHub.Connections[transfer.to].token : null;
+                if (conId != null && ChatHub.Connections[transfer.to].type == "SIGNALR") await hubContext.Clients.Client(conId).SendAsync("ReceiveMessage", transfer.content);
+                else if(conId != null && ChatHub.Connections[transfer.to].type == "FIREBASE")
+                {
+                    FirebaseApp.Create(new AppOptions()
+                    {
+                        Credential = GoogleCredential.FromFile("firebaseAdmin.json")
+                    });
+
+                    var firebaseMessage = new FirebaseAdmin.Messaging.Message()
+                    {
+                        Token = conId,
+                        Notification = new Notification()
+                        {
+                            Title = "Hello",
+                            Body = "world"
+                        }
+                    };
+                    string response = FirebaseMessaging.DefaultInstance.SendAsync(firebaseMessage).Result;
+                }
+
+     
                 return NoContent();
             }
             catch (Exception ex)
@@ -81,11 +105,30 @@ namespace webAPI.Controllers
 
         }
 
+        [Authorize]
+        [Route("firebase/onconnect")]
+        [HttpPost]
+        public async Task<IActionResult> FirebaseOnConnect([FromBody] string firebaseToken)
+        {
+            try
+            {
+                var userId = HttpContext.User.FindFirst("userid")?.Value;
+                if (ChatHub.Connections.ContainsKey(userId))
+                    ChatHub.Connections[userId] = new ConnectionToken() { token = firebaseToken,type = "FIREBASE" };
+                else
+                    ChatHub.Connections.TryAdd(userId, new ConnectionToken() { token = firebaseToken, type = "FIREBASE" });
+                
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return NotFound();
+            }
+            
+            
+        }
 
-
-
-
-    }
+        }
 
     
 }
