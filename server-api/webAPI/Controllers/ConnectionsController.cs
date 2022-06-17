@@ -78,24 +78,23 @@ namespace webAPI.Controllers
                 if (conId != null && ChatHub.Connections[transfer.to].type == "SIGNALR") await hubContext.Clients.Client(conId).SendAsync("ReceiveMessage", transfer.content);
                 else if(conId != null && ChatHub.Connections[transfer.to].type == "FIREBASE")
                 {
-                    FirebaseApp.Create(new AppOptions()
-                    {
-                        Credential = GoogleCredential.FromFile("firebaseAdmin.json")
-                    });
 
                     var firebaseMessage = new FirebaseAdmin.Messaging.Message()
                     {
                         Token = conId,
                         Notification = new Notification()
                         {
-                            Title = "Hello",
-                            Body = "world"
+                            Title = transfer.from,
+                            Body = transfer.content
                         }
                     };
-                    string response = FirebaseMessaging.DefaultInstance.SendAsync(firebaseMessage).Result;
+                    Task.Run(() =>
+                    {
+                        string response = FirebaseMessaging.DefaultInstance.SendAsync(firebaseMessage).Result;
+                    }).ConfigureAwait(false);
+                        
+                    
                 }
-
-     
                 return NoContent();
             }
             catch (Exception ex)
