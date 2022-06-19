@@ -30,6 +30,13 @@ cd Chat4YouWeb
 
 Please open the appsettings.json files in RatingApp/Chat4YouServer & server-api/webAPI, and change the DB section username and password to those you declared in your mariaDB installation.
 
+It is recommended for you to delete the Repository/Migrations folder, and type those commands on the NuGet CLI:
+
+```
+add-migration init
+database-update
+```
+
 run these commands:
 
 ```
