@@ -88,10 +88,10 @@ namespace webAPI.Controllers
                             Body = transfer.content
                         }
                     };
-                    Task.Run(() =>
-                    {
-                        string response = FirebaseMessaging.DefaultInstance.SendAsync(firebaseMessage).Result;
-                    }).ConfigureAwait(false);
+                    
+                    
+                    string response = FirebaseMessaging.DefaultInstance.SendAsync(firebaseMessage).Result;
+                    
                         
                     
                 }
